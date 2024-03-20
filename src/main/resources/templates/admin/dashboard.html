@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de administração</title>
+</head>
+<body>
+    <h2>Bem-vindo ao Painel de Administração</h2>
+    <p>Logado como: <span sec:authentication="name"></span></p>
+    <p>Função: <span sec:authentication="authorities"></span></p>
+    <p><a th:href="@{/}">Home</a></p>
+    <p><a th:href="@{/logout}">Sair</a></p>
+</body>
+</html>

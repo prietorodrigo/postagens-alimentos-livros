@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    </head>
+    <body>
+        <th:block th:include="menu"></th:block>
+        <div class="container" style="padding:20px">
+            <a href="/calorias/111">111</a>
+            <a href="/calorias/250">250</a>
+            <form method="post" action="pesquisar">
+                Buscar:<input type="text" name="texto"/>
+                <input type="submit"/>
+            </form>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Alimentos</li>
+                </ol>
+            </nav>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Calorías</th>
+                        <th scope="col">Imagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="alimento : ${alimentos}">
+                        <th scope="row" th:text = ${alimento.id}></th>
+                        <td th:text = ${alimento.nome}></td>
+                        <td th:text = ${alimento.categoria}></td>
+                        <td th:text = ${alimento.calorias}></td>
+                        <td><img th:src="@{/imagem/{imagem}(imagem = ${alimento.imagem})}" width="50px"></td>
+                        <td><a th:href="@{/editarAlimento/{id} (id=${alimento.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a th:href="@{/excluirAlimento/{id} (id=${alimento.id})}"><i class="bi bi-trash"></i></a></td>
+                        <td><a th:href="@{/vermaisAlimento/{id} (id=${alimento.id})}"><i class="bi bi-zoom-in"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

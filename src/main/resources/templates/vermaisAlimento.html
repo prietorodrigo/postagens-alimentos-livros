@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<th:block th:include="menu"></th:block>
+<div class="container" style="padding:20px">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Alimento</li>
+        </ol>
+    </nav>
+    <div class="card" style="margin:20px">
+        <div class="card-header">
+            #<span th:text = ${id}></span>
+        </div>
+        <div class="card-body">
+            <img th:src="@{/imagem/{imagem}(imagem = ${imagem})}" width="500px">
+            <h5 class="card-title">
+                Nome: <span th:text = ${nome}></span>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                Categoría: <span th:text = ${categoria}></span>
+            </h6>
+            <p class="card-text">
+                Calorías: <span th:text = ${calorias}></span>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

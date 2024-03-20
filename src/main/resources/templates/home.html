@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <title>Página inicial</title>
+    </head>
+    <body>
+        <th:block th:include="menu"></th:block>
+        <h1>Bem-vindo à página inicial</h1>
+        <p sec:authorize="hasRole('ROLE_ANONYMOUS')">Texto visível para anônimo.</p>
+        <p sec:authorize="hasRole('USER')">Texto visível para o usuário.</p>
+        <p sec:authorize="hasRole('ADMIN')">Texto visível para o administrador.</p>
+        <p sec:authorize="isAuthenticated()">Texto visível apenas para usuários autenticados.</p>
+
+        <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+            <p><a th:href="@{|/login|}" th:text="'Log in'"></a></p>
+            <p><a th:href="@{|/register|}" th:text="'Register'"></a></p>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <p>Logged as: <span sec:authentication="name"></span></p>
+            <p>Has role: <span sec:authentication="authorities"></span></p>
+            <p sec:authorize="hasAuthority('USER')"><a th:href="@{|/user/dashboard|}" th:text="'User Dashboard'"></a></p>
+            <p sec:authorize="hasAuthority('ADMIN')"><a th:href="@{|/admin/dashboard|}" th:text="'Admin Dashboard'"></a></p>
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </body>
+</html>
+
